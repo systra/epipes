@@ -1,0 +1,15 @@
+%% ex: ft=erlang
+
+{application, epipes,
+    [
+        {description, "Executes OS cmd with handling stdin/stdout"},
+        {vsn, "1.0.0"},
+        {registered, []},
+        {applications, [
+                kernel,
+                stdlib
+            ]},
+        {mod, {epipes, []}},
+        {modules, []},
+        {env, []}
+    ]}.
