@@ -33,14 +33,14 @@ int main(int argc, char *argv[]) {
     char *cmd = argv[1];
     char *exec_args[64] = {0};
     int i;
-  
+
     for (i = 0; i < argc - 1; i++) {
       /* args to stdin_forcer are the program and optional args to exec.
          Here we copy pointers pointing to strings of cmd/args.
          exec_args is indexed one lower than argv. */
       exec_args[i] = argv[i+1];
     }
-    
+
     close(PARENT_READ);  /* We aren't the parent. Decrement fd refcounts. */
     close(PARENT_WRITE);
 
@@ -66,12 +66,18 @@ int main(int argc, char *argv[]) {
     close(CHILD_WRITE);
     /* We should catch the child's exit signal if it dies before we send STDIN*/
     while (read(STDIN_FILENO, &buf, 1) > 0 && buf != 0x0) {
-      write(PARENT_WRITE, &buf, 1);
+      if (write(PARENT_WRITE, &buf, 1) < 0) {
+        perror("parent write");
+        exit(EXIT_FAILURE);
+      }
     }
     close(PARENT_WRITE); /* closing PARENT_WRITE sends EOF to CHILD_READ */
     wait(NULL);          /* Wait for child to exit */
     while (read(PARENT_READ, &buf, 1) > 0) {
-      write(STDOUT_FILENO, &buf, 1);  /* Vomit forth our output on STDOUT */
+      if (write(STDOUT_FILENO, &buf, 1) < 0) {  /* Vomit forth our output on STDOUT */
+        perror("stdout write");
+        exit(EXIT_FAILURE);
+      }
     }
     close(PARENT_READ);      /* done reading from writepipe */
     exit(EXIT_SUCCESS);      /* This was a triumph */
