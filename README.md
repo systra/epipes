@@ -26,6 +26,6 @@ and then you can invoke sample shell script:
 
 #### Credits:
 
-- to [Matt Stancliff] (@mattsta) for stdin/stdout proxy - 'stdin_forcer'
+- to [Matt Stancliff] (https://github.com/mattsta) for stdin/stdout proxy - 'stdin_forcer'
 
 [![endorse](http://api.coderwall.com/systra/endorse.png)](http://coderwall.com/systra)
