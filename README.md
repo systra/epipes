@@ -29,3 +29,7 @@ and then you can invoke sample shell script:
 - to [Matt Stancliff] (https://github.com/mattsta) for stdin/stdout proxy - 'stdin_forcer'
 
 [![endorse](http://api.coderwall.com/systra/endorse.png)](http://coderwall.com/systra)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/systra/epipes/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
